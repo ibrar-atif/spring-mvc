@@ -12,6 +12,13 @@
 </head>
 <body>
 Welcome
-${emp.name}
+${emp.name} ${name} ${emp.age}
+<form:form  method="post" action="saveEmp" modelAttribute="emp">
+Name : <form:input type="text" path="name" name="name"/>
+<br/>
+
+Age : <form:input type="text" path="age" name="age"/>
+<form:button type="submit">Save</form:button>
+</form:form>
 </body>
 </html>
