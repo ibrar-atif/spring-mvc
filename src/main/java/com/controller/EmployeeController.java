@@ -24,6 +24,7 @@ public class EmployeeController {
 		model.addAttribute("emp", emp);
 		model.addAttribute("name", "Roshan");
 		return "employeedetail";
+		
 	}
 	
 	@RequestMapping(value="/saveEmp",method=RequestMethod.POST)
