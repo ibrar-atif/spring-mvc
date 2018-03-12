@@ -13,6 +13,9 @@
 <body>
 Welcome
 ${emp.name} ${name} ${emp.age}
+
+<br/>
+<br/>
 <form:form  method="post" action="saveEmp" modelAttribute="emp">
 Name : <form:input type="text" path="name" name="name"/>
 <br/>

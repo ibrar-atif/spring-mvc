@@ -2,6 +2,7 @@ package com.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -18,14 +19,17 @@ import com.service.PersonService;
 @Controller
 @SessionAttributes("person")
 public class PersonController {
+	
+	//@Autowired
+	Person p;
 
 	@Autowired
 	PersonService personService;
 	
 	@RequestMapping("/personform/{id}")
 	public String personForm(Model model, @PathVariable("id") int id){
-		
-		Person p = personService.getPerson(id);
+		//BeanUtils.copyProperties(personService.getPerson(id), p);
+		p = personService.getPerson(id);
 		model.addAttribute("person", p);
 		System.out.println(getPersonService());
 		System.out.println(new PersonController().getPersonService());
@@ -51,6 +55,30 @@ public class PersonController {
 	}
 	
 	
+	@RequestMapping(value="/show")
+	public String Show(Model model, @ModelAttribute("person") Person p){
+		
+		model.addAttribute("person", p);
+		return "personShow";
+	}
+	
+	@RequestMapping("/form")
+	public String personForm1(Model model, @ModelAttribute("person") Person p){
+		//BeanUtils.copyProperties(personService.getPerson(id), p);
+		
+		p.setName("Atif");
+		
+		model.addAttribute("person", p);
+		System.out.println(getPersonService());
+		System.out.println(new PersonController().getPersonService());
+		return "persondetail";
+	}
+	
+	
+	@ModelAttribute("person")
+	public Person getPerson(){
+		return new Person();
+	}
 	
 	
 }

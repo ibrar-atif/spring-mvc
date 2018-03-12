@@ -1,5 +1,6 @@
 package com.controller;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,13 +17,13 @@ import com.model.EmployeeDto;
 @RequestMapping("/employee")
 public class EmployeeController {
 	
-	@RequestMapping("/getemployee/{age1}/{name1}")
-	public String getEmployee(Model model, @PathVariable("age1") int age,@PathVariable("name1") String name){
+	@RequestMapping("/getemployee/{age1}/{name1}/{t}")
+	public String getEmployee(Model model, @PathVariable("age1") int age,@PathVariable("name1") String name,@PathVariable("t") String name1){
 		EmployeeDto emp = new EmployeeDto();
 		emp.setName(name);
 		emp.setAge(age);
 		model.addAttribute("emp", emp);
-		model.addAttribute("name", "Roshan");
+		model.addAttribute("name", name1);
 		return "employeedetail";
 		
 	}
@@ -46,6 +47,17 @@ public class EmployeeController {
 	
 	public EmployeeController(){
 		System.out.println("controller");
+	}
+	
+	@RequestMapping("/getemployee")
+	public String getEmployee1(Model model){
+		EmployeeDto emp = new EmployeeDto();
+		emp.setName("Srini");
+		emp.setAge(40);
+		model.addAttribute("emp", emp);
+		model.addAttribute("name", "my name is srini");
+		return "employeedetail";
+		
 	}
 
 }
