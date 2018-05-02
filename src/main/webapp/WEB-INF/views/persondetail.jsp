@@ -19,7 +19,7 @@ Age: ${person.age}
 <br/>
 City: ${person.city}
 
-<form:form  method="post" action="../personSave" modelAttribute="person">
+<form:form  method="post" action="../personSave" modelAttribute="p123">
 Name : <form:input type="text" path="name" name="name"/>
 <br/>
 

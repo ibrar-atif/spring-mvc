@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.model.Person;
 import com.service.PersonService;
 
 @Controller
-@SessionAttributes("person")
+@SessionAttributes("p123")
 public class PersonController {
 	
-	//@Autowired
+	@Autowired
 	Person p;
 
 	@Autowired
@@ -28,19 +30,18 @@ public class PersonController {
 	
 	@RequestMapping("/personform/{id}")
 	public String personForm(Model model, @PathVariable("id") int id){
-		//BeanUtils.copyProperties(personService.getPerson(id), p);
-		p = personService.getPerson(id);
-		model.addAttribute("person", p);
-		System.out.println(getPersonService());
-		System.out.println(new PersonController().getPersonService());
+		BeanUtils.copyProperties(personService.getPerson(id), p);
+		//p=personService.getPerson(id);
+		//Person p1 = personService.getPerson(id);
+		model.addAttribute("p123", p);
 		return "persondetail";
 	}
 	
 	
 	@RequestMapping(value="/personSave",method=RequestMethod.POST)
-	public String personFormSave(Model model,@ModelAttribute("person") Person person){
+	public String personFormSave(Model model,@ModelAttribute("p123") Person person){
 		
-		model.addAttribute("person", person);
+		model.addAttribute("p123", person);
 		return "personShow";
 	}
 
@@ -56,14 +57,14 @@ public class PersonController {
 	
 	
 	@RequestMapping(value="/show")
-	public String Show(Model model, @ModelAttribute("person") Person p){
+	public String Show(Model model){
 		
-		model.addAttribute("person", p);
+		model.addAttribute("p123", p);
 		return "personShow";
 	}
 	
 	@RequestMapping("/form")
-	public String personForm1(Model model, @ModelAttribute("person") Person p){
+	public String personForm1(Model model, @ModelAttribute("p123") Person p){
 		//BeanUtils.copyProperties(personService.getPerson(id), p);
 		
 		p.setName("Atif");
@@ -78,6 +79,25 @@ public class PersonController {
 	@ModelAttribute("person")
 	public Person getPerson(){
 		return new Person();
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(
+		@RequestParam(value = "error", required = false) String error,
+		@RequestParam(value = "logout", required = false) String logout) {
+
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
+
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("login");
+
+		return model;
+
 	}
 	
 	

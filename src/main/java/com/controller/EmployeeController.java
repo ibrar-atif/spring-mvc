@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.model.EmployeeDto;
 
 @Controller
-@RequestMapping("/employee")
+//@RequestMapping("/employee")
 public class EmployeeController {
 	
 	@RequestMapping("/getemployee/{age1}/{name1}/{t}")
@@ -59,5 +59,7 @@ public class EmployeeController {
 		return "employeedetail";
 		
 	}
+	
+	
 
 }

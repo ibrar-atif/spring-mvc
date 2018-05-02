@@ -12,10 +12,10 @@
 </head>
 <body>
 Welcome
-Name: ${person.name}
+Name: ${p123.name}
 <br/>
-Age: ${person.age} 
+Age: ${p123.age} 
 <br/>
-City: ${person.city}
+City: ${p123.city}
 </body>
 </html>
